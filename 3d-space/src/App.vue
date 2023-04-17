@@ -1,10 +1,23 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view />
+  <component :is="layout">
+    <router-view />
+  </component>
 </template>
+
+<script>
+import DefaultLayout from "./layouts/DefaultLayout.vue";
+
+export default {
+  computed: {
+    layout() {
+      return (this.$route.meta.layout || "default") + "-layout";
+    },
+  },
+  components: {
+    DefaultLayout,
+  },
+};
+</script>
 
 <style>
 #app {
