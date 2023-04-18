@@ -31,6 +31,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
   color: #1b1b1b;
   background-color: #fff;
+  box-sizing: border-box;
+}
+
+p {
+  margin: 0;
+  padding: 0;
 }
 
 a {
@@ -44,5 +50,6 @@ button {
   border: 0px;
   background-color: #fff;
   padding: 0px;
+  cursor: pointer;
 }
 </style>

@@ -1,4 +1,14 @@
 <template>
+  <div
+    class="login-modal"
+    @click.self="closeModal"
+    v-if="isModalActive"
+  >
+    <LoginModal
+      @modalEmit="closeModal"
+    />
+  </div>
+
   <div class="header__wrap"></div>
   <nav class="header">
     <router-link to="/">
@@ -15,19 +25,50 @@
         Поиск
       </p>
     </div>
-    <button class="header__login">
+    <button
+      class="header__login"
+      @click="openModal"
+    >
       Войти
     </button>
   </nav>
 </template>
 
 <script>
+import LoginModal from "@/components/LoginModal.vue";
+
 export default {
   name: "CastomHeader",
+  components: {
+    LoginModal,
+  },
+  data() {
+    return {
+      isModalActive: false,
+    }
+  },
+  methods: {
+    closeModal () {
+      this.isModalActive = false
+    },
+    openModal () {
+      this.isModalActive = true
+    }
+  }
 };
 </script>
 
 <style scoped>
+.login-modal{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(0, 0, 0, .5);
+}
 .header__wrap {
   height: 50px;
 }
