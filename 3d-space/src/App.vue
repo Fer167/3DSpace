@@ -20,24 +20,29 @@ export default {
 </script>
 
 <style>
+body {  
+  margin: 0;
+  padding: 0;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  color: #1b1b1b;
+  background-color: #fff;
 }
 
-nav {
-  padding: 30px;
+a {
+  color: #1b1b1b;
+  text-decoration: none;
 }
 
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
+button {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  border: 0px;
+  background-color: #fff;
+  padding: 0px;
 }
 </style>
