@@ -1,15 +1,14 @@
 <template>
-  <div class="home">
-  </div>
+  <SectionTitle />
 </template>
 
 <script>
-import HelloWorld from "@/components/HelloWorld.vue";
+import SectionTitle from "@/components/SectionTitle.vue";
 
 export default {
   name: "MainPage",
   components: {
-    HelloWorld,
+    SectionTitle,
   },
 };
 </script>
