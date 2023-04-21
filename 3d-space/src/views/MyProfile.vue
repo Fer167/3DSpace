@@ -1,5 +1,30 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
+  <PersonTitle></PersonTitle>
+  <PersonData />
 </template>
+
+<script>
+import PersonTitle from "@/components/PersonTitle.vue";
+import PersonData from "@/components/PersonData.vue";
+
+export default {
+  props: {
+  },
+  components: {
+    PersonTitle,
+    PersonData,
+  },
+  data() {
+    return {
+
+    }
+  },
+  methods: {
+
+  }
+};
+</script>
+
+<style scoped>
+
+</style>
