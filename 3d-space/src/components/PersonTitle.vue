@@ -48,6 +48,7 @@ export default {
   border: 1px solid #000;
 }
 .person__name {
+  margin-top: 20px;
   font-size: 24px;
   margin-bottom: 20px;
 }

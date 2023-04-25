@@ -1,6 +1,9 @@
 <template>
   <!-- <div class="footer__wrap"></div> -->
-  <footer class="footer">
+  <footer
+    class="footer"
+    :class="footerFixed ? 'footer__wrap-fixed' : ''"
+  >
     <div class="footer__data">
       <p class="footer__copyright">
         © 3D Space, 2023
@@ -15,6 +18,14 @@
 <script>
 export default {
   name: "CastomFooter",
+  data() {
+    return {
+      footerFixed: false,
+    }
+  },
+  mounted () {
+    
+  }
 };
 </script>
 
@@ -27,8 +38,12 @@ export default {
   display: flex;
   flex-direction: row;
   height: 50px;
-  width: 100%;
+  width: 100vw;
   background-color: #242424;
+}
+.footer__wrap-fixed {
+  position: fixed;
+  bottom: 0;
 }
 .footer__data {
   width: 1280px;

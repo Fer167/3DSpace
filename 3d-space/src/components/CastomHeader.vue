@@ -22,7 +22,7 @@
             Имя
           </router-link>
         </p>
-        <hr>
+        <hr class="header__hr">
         <p class="header__menu-text">
           <router-link class="header__menu-link" to="/MyProfile">
             Мой профиль
@@ -33,7 +33,7 @@
             Мои работы
           </router-link>
         </p>
-        <hr>
+        <hr class="header__hr">
         <p class="header__menu-text">
           <router-link class="header__menu-link" to="/3DModels">
             Редактировать профиль
@@ -44,7 +44,7 @@
             Загрузить работу
           </router-link>
         </p>
-        <hr>
+        <hr class="header__hr">
         <p class="header__menu-text">
           <router-link class="header__menu-link" to="/3DModels">
             Выйти
@@ -103,6 +103,7 @@ export default {
   },
   beforeDestroy () {
     window.removeEventListener('scroll', this.amimationFomOpacity);
+    document.removeEventListener("click", this.closeManu);
   },
   methods: {
     amimationFomOpacity () {
@@ -117,7 +118,17 @@ export default {
       document.body.style.overflow = "hidden";
     },
     openMenu () {
-      this.isMenuActive = !this.isMenuActive;
+      this.isMenuActive = true;
+      setTimeout(() => {
+        document.addEventListener("click", this.closeManu);
+      }, 1);
+    },
+    closeManu (event) {
+      // if (event.target.classList[0] !== "header__hr" || event.target.classList[0] != "header__menu" || event.target.classList[0] != "header__avatar") {
+        // console.log(event.target.classList[0])
+        this.isMenuActive = false;
+        document.removeEventListener("click", this.closeManu);
+      // }
     },
   }
 };
@@ -127,7 +138,7 @@ export default {
 .header__wrap-height {
   height: 50px;
 }
-hr {
+.header__hr {
   margin: 0;
   padding: 0;
   border: 0.5px solid #525252;
