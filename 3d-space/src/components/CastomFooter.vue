@@ -1,5 +1,5 @@
 <template>
-  <!-- <div class="footer__wrap"></div> -->
+  <div class="footer__wrap"></div>
   <footer
     class="footer"
     :class="footerFixed ? 'footer__wrap-fixed' : ''"
@@ -9,7 +9,7 @@
         © 3D Space, 2023
       </p>
       <p class="footer__copyright">
-        Форма обратной связи
+        <!-- Форма обратной связи -->
       </p>
     </div>
   </footer>
@@ -30,16 +30,21 @@ export default {
 </script>
 
 <style scoped>
-/* .footer__wrap{
+.footer__wrap{
+  width: 0px;
+  margin: 0;
+  padding: 0;
   height: 50px;
-  background-color: rgb(0, 0, 0,0);
-} */
+}
 .footer {
   display: flex;
   flex-direction: row;
   height: 50px;
   width: 100vw;
   background-color: #242424;
+  position: fixed;
+  bottom: 0;
+  z-index: -100;
 }
 .footer__wrap-fixed {
   position: fixed;

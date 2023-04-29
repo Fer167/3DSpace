@@ -16,15 +16,11 @@
           <div
             v-for="(item, index) of sliderData"
             :key="index"
-            :class="index == sliderNumber ? 'title__box-items_active' : 'title__box-items'"
+            class="title__box-items"
             @click="goNextSlide(index)"
           >
+            <div :class="index == sliderNumber ? 'title__box-color_active' : 'title__box-color'" />
           </div>
-          <!-- <div class="title__box-items" :class="isMovies ? 'last-channels__button--collection' : ''" @click="goNextSlide(1)"></div>
-          <div class="title__box-items" @click="goNextSlide(2)"></div>
-          <div class="title__box-items" @click="goNextSlide(3)"></div>
-          <div class="title__box-items" @click="goNextSlide(4)"></div>
-          <div class="title__box-items" @click="goNextSlide(5)"></div> -->
         </div>
       </div>
     </aside>
@@ -85,7 +81,6 @@ export default {
   width: 2600px;
   top: -400px;
   margin-left: -450px;
-  z-index: -1;
 }
 .title {
   overflow: hidden;
@@ -98,6 +93,8 @@ export default {
 .title__information {
   width: 50%;
   margin-top: 100px;
+  position: relative;
+  z-index: 1;
 }
 .title__wrap-description {
   display: flex;
@@ -132,17 +129,21 @@ export default {
 .title__box-items{
   width: 90px;
   height: 5px;
-  background-color: #B0B0B0;
-  margin: 5px;
+  padding: 5px;
   cursor: pointer;
 }
-.title__box-items_active{
-  width: 90px;
-  height: 5px;
+.title__box-color {
+  background-color: #B0B0B0;
+  width: 100%;
+  height: 100%;
+}
+.title__box-color_active {
   background-color: #35B7FF;
-  margin: 5px;
-  cursor: pointer;
+  width: 100%;
+  height: 100%;
 }
 .title__medel {
+  position: relative;
+  z-index: 1;
 }
 </style>

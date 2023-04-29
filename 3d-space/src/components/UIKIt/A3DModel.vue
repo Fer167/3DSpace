@@ -1,5 +1,6 @@
 <template>
   <canvas class="model" ref="canvasRef"></canvas>
+  <p class="link-model">Ссылка на модель: https://market.pmnd.rs/model/zombie-car</p>
 </template>
 
 <script setup>
@@ -137,19 +138,30 @@
   //       TEXTURE.needsUpdate = true;
   //   });
   // }
+
+
+  import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+  import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+  import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
   import * as THREE from "three";
   import { onMounted, onUnmounted, ref, render } from "vue";
-  
+
   let scene = new THREE.Scene();
   let renderer;
+  let controls;
+
+  let shownModel;
+  let loadedModel;
+  let modelName = "main";
+
   let canvasRef = ref();
 
-  let boxGeometry = new THREE.BoxGeometry(1, 1, 1);
-  let boxMaterial = new THREE.MeshStandardMaterial({ color: "mediumpurple" });
-  let box = new THREE.Mesh(boxGeometry, boxMaterial);
-  box.position.set(0, 0, -2);
+  // let boxGeometry = new THREE.BoxGeometry(1, 1, 1);
+  // let boxMaterial = new THREE.MeshStandardMaterial({ color: "mediumpurple" });
+  // let box = new THREE.Mesh(boxGeometry, boxMaterial);
+  // box.position.set(0, 0, -2);
 
-  scene.add(box);
+  // scene.add(box);
 
   let ambientLight = new  THREE.AmbientLight("#FFFFFF", 1);
   scene.add(ambientLight);
@@ -160,26 +172,27 @@
     0.1,
     100
   );
-  camera.position.y=1;
-  camera.position.z=2;
+  camera.position.y=10;
+  camera.position.z=20;
+  camera.position.x=20;
+
   camera.lookAt(new THREE.Vector3(0, 0, 0));
 
   scene.add(camera);
 
-  // let loop = () => {
-  //   box.rotation.y += 0.02;
-  //   renderer.render(scene, camera);
-  //   requestAnimationFrame(loop);
-  // };
-
   let loop = () => {
-    box.rotation.y += 0.02;
+    // box.rotation.y += 0.02;
+
+    controls.update();
     renderer.render(scene, camera);
   };
 
-  // let resizeCallback = () => {
-  //   renderer.setSeze()
-  // }
+  let resizeCallback = () => {
+    renderer.setSize(640, 640);
+
+    camera.aspect = 640 / 640;
+    camera.updateProjectionMatrix();
+  }
 
   onMounted(() =>{
     renderer = new THREE.WebGLRenderer({
@@ -191,17 +204,110 @@
     renderer.setSize(640, 640);
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.render(scene, camera);
-    
-    // requestAnimationFrame(loop);
+    renderer.xr.enabled = true;
+
     renderer.setAnimationLoop(loop);
+
+    controls = new OrbitControls(camera, canvasRef.value);
+    controls.enabledDamping = true;
+
+    const gltfLoader = new GLTFLoader();
+    let dracoLoader = new DRACOLoader();
+    dracoLoader.setDecoderPath("/draco/");
+    gltfLoader.setDRACOLoader(dracoLoader);
+
+    gltfLoader.load(`/models/${modelName}.gltf`, (gltf) => {
+    // gltfLoader.load(`../../assets/3dModels/Main/scene.gltf`, (gltf) => {
+      loadedModel = gltf.scene.children[0];
+
+      shownModel = loadedModel.clone();
+      shownModel.name = modelName;
+      const scaleModel = 0.8;
+      shownModel.scale.set(scaleModel, scaleModel, scaleModel);
+      scene.add(shownModel);
+    })
+
+    window.addEventListener("resize", resizeCallback);
   })
 
   onUnmounted(() => {
     renderer.setAnimationLoop(null);
+    window.removeEventListener("resize", resizeCallback);
   })
+
+
+
+  // import * as THREE from "three";
+  // import { onMounted, onUnmounted, ref, render } from "vue";
+  
+  // let scene = new THREE.Scene();
+  // let renderer;
+  // let canvasRef = ref();
+
+  // let boxGeometry = new THREE.BoxGeometry(1, 1, 1);
+  // let boxMaterial = new THREE.MeshStandardMaterial({ color: "mediumpurple" });
+  // let box = new THREE.Mesh(boxGeometry, boxMaterial);
+  // box.position.set(0, 0, -2);
+
+  // scene.add(box);
+
+  // let ambientLight = new  THREE.AmbientLight("#FFFFFF", 1);
+  // scene.add(ambientLight);
+
+  // let camera = new THREE.PerspectiveCamera(
+  //   75,
+  //   600 / 600,
+  //   0.1,
+  //   100
+  // );
+  // camera.position.y=1;
+  // camera.position.z=2;
+  // camera.lookAt(new THREE.Vector3(0, 0, 0));
+
+  // scene.add(camera);
+
+  // // let loop = () => {
+  // //   box.rotation.y += 0.02;
+  // //   renderer.render(scene, camera);
+  // //   requestAnimationFrame(loop);
+  // // };
+
+  // let loop = () => {
+  //   box.rotation.y += 0.02;
+  //   renderer.render(scene, camera);
+  // };
+
+  // // let resizeCallback = () => {
+  // //   renderer.setSize()
+  // // }
+
+  // onMounted(() =>{
+  //   renderer = new THREE.WebGLRenderer({
+  //     canvas: canvasRef.value,
+  //     antialias: true,
+  //     alpha: true,
+  //   });
+
+  //   renderer.setSize(640, 640);
+  //   renderer.setPixelRatio(window.devicePixelRatio);
+  //   renderer.render(scene, camera);
+    
+  //   // requestAnimationFrame(loop);
+  //   renderer.setAnimationLoop(loop);
+  // })
+
+  // onUnmounted(() => {
+  //   renderer.setAnimationLoop(null);
+  // })
 </script>
 
 <style scoped>
+.link-model {
+  opacity: 0.5;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 .model {
 }
 </style>

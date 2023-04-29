@@ -17,44 +17,42 @@
         v-if="isMenuActive"
         class="header__menu"
       >
-        <p class="header__menu-text">
-          <router-link class="header__menu-link" to="/MyProfile">
+        <p class="header__menu-title">
             Имя
-          </router-link>
         </p>
         <hr class="header__hr">
-        <p class="header__menu-text">
-          <router-link class="header__menu-link" to="/MyProfile">
-            Мой профиль
-          </router-link>
-        </p>
-        <p class="header__menu-text">
-          <router-link class="header__menu-link" to="/MyProfile">
-            Мои работы
-          </router-link>
-        </p>
+        <router-link class="header__menu-link" to="/MyProfile">
+          <p class="header__menu-text">
+              Мой профиль
+          </p>
+        </router-link>
+        <router-link class="header__menu-link" to="/MyProfile">
+          <p class="header__menu-text">
+              Мои работы
+          </p>
+        </router-link>
         <hr class="header__hr">
-        <p class="header__menu-text">
-          <router-link class="header__menu-link" to="/3DModels">
-            Редактировать профиль
-          </router-link>
-        </p>
-        <p class="header__menu-text">
-          <router-link class="header__menu-link" to="/3DModels">
-            Загрузить работу
-          </router-link>
-        </p>
+        <router-link class="header__menu-link" to="/3DModels">
+          <p class="header__menu-text">
+              Редактировать профиль
+          </p>
+        </router-link>
+        <router-link class="header__menu-link" to="/3DModels">
+          <p class="header__menu-text">
+              Загрузить модель
+          </p>
+        </router-link>
         <hr class="header__hr">
-        <p class="header__menu-text">
-          <router-link class="header__menu-link" to="/3DModels">
-            Выйти
-          </router-link>
-        </p>
+        <router-link class="header__menu-link" to="/3DModels">
+          <p class="header__menu-text">
+              Выйти
+          </p>
+        </router-link>
       </div>
 
       <router-link to="/">
         <img class="header__logo"
-        src="../assets/image/logo/first.png"
+        src="../assets/image/logo/second.png"
         alt="Logo">
       </router-link>
       <router-link class="header__3d-models" to="/3DModels">
@@ -76,7 +74,7 @@
         class="header__login"
         @click="openMenu"
       >
-        <img class="header__avatar" src="../assets/image/person/avatarDefault.jpg">
+        <img class="header__avatar" src="../assets/image/person/avatarDefault_example.jpg">
       </button>
     </nav>
   </div>
@@ -161,8 +159,10 @@ export default {
   height: 50px;
   width: 100vw;
   transition: background-color 0.5s;
+  z-index: 1000;
 }
 .header__menu {
+  animation: 0.2s 1 normal createModalMenu;
   padding: 5px;
   color: #FFFFFF;
   position: absolute;
@@ -173,10 +173,28 @@ export default {
   width: 200px;
   background-color: #1E1E1E;
 }
+@keyframes createModalMenu {
+  from {
+    right: -10px;
+    opacity: 0;
+  }
+
+  to {
+    right: 0;
+    opacity: 1;
+  }
+}
+.header__menu-title {
+  font-size: 16px;
+  padding: 8px;
+}
 .header__menu-text {
   font-size: 14px;
   padding: 8px;
   cursor: pointer;
+}
+.header__menu-text:hover {
+  background-color: #5f5f5f;
 }
 .header__menu-link {
   color: #FFFFFF;
@@ -201,6 +219,9 @@ export default {
   justify-content: center;
   align-items: center;
   min-width: 120px;
+}
+.header__3d-models:hover {
+  color: #35B7FF;
 }
 
 .header__search {
@@ -236,7 +257,7 @@ export default {
   cursor: pointer;
 }
 .header__avatar {
-  width: 40px;
+  width: 36px;
   border: 1px solid #000;
 
 }

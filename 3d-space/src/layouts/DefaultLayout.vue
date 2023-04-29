@@ -1,6 +1,6 @@
 <template>
   <CastomHeader></CastomHeader>
-  <div>
+  <div class="fon">
     <router-view />
   </div>
   <CastomFooter></CastomFooter>
@@ -18,3 +18,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.fon {
+  background-color: #fff;
+}
+</style>

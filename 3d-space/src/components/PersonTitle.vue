@@ -1,7 +1,7 @@
 <template>
   <section class="person">
     <div class="person__img-wrap">
-      <img class="person__img" src="../assets/image/person/avatarDefault.jpg">
+      <img class="person__img" src="../assets/image/person/avatarDefault_example.jpg">
     </div>
     <div>
       <p class="person__name">

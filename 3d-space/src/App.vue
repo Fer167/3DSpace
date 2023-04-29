@@ -21,7 +21,7 @@ export default {
 
 <style>
 body {  
-  padding: 0 calc(20px - (100vw - 100%)) 0 0;
+  padding: 0 calc(10px - (100vw - 100%)) 0 0;
   margin: 0;
   overflow-x: hidden;
 }
@@ -31,7 +31,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #1b1b1b;
-  /* background-color: #fff; */
   box-sizing: border-box;
 }
 
