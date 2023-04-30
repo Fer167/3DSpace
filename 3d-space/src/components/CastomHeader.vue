@@ -21,12 +21,20 @@
             Имя
         </p>
         <hr class="header__hr">
-        <router-link class="header__menu-link" to="/MyProfile">
+        <router-link
+          class="header__menu-link"
+          @click="swapActiveProfileSection('about_me')"
+          to="/MyProfile"
+        >
           <p class="header__menu-text">
               Мой профиль
           </p>
         </router-link>
-        <router-link class="header__menu-link" to="/MyProfile">
+        <router-link
+          class="header__menu-link"
+          @click="swapActiveProfileSection('my_works')"
+          to="/MyProfile"
+        >
           <p class="header__menu-text">
               Мои работы
           </p>
@@ -128,6 +136,12 @@ export default {
         document.removeEventListener("click", this.closeManu);
       // }
     },
+    swapActiveProfileSection (val) {
+      this.$store.commit('SET_activeProfileSection', val);
+      if (document.querySelector(".preson-data__hr-blue")) {
+        val === 'about_me' ? document.querySelector(".preson-data__hr-blue").style.left = "0px" : document.querySelector(".preson-data__hr-blue").style.left = "200px"
+      }
+    }
   }
 };
 </script>

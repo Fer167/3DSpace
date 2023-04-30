@@ -1,9 +1,19 @@
 import { createStore } from "vuex";
 
 export default createStore({
-  state: {},
-  getters: {},
-  mutations: {},
+  state: {
+    activeProfileSection: "about_me",
+  },
+  getters: {
+    activeProfileSection: state => {
+      return state.activeProfileSection;
+    },
+  },
+  mutations: {
+    SET_activeProfileSection: (state, payload) => {
+      state.activeProfileSection = payload;
+    },
+  },
   actions: {},
   modules: {},
 });

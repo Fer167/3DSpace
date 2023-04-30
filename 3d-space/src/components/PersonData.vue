@@ -3,15 +3,15 @@
     <div class="preson-data__nav">
       <p
         class="preson-data__about"
-        :class="activePage == 0 ? 'preson-data__page_active' : ''"
-        @click="swapActivePage(0)"
+        :class="this.$store.getters.activeProfileSection == 'about_me' ? 'preson-data__page_active' : ''"
+        @click="swapActiveProfileSection('about_me')"
       >
         Обо мне
       </p>
       <p 
         class="preson-data__works"
-        :class="activePage == 1 ? 'preson-data__page_active' : ''"
-        @click="swapActivePage(1)"
+        :class="this.$store.getters.activeProfileSection == 'my_works' ? 'preson-data__page_active' : ''"
+        @click="swapActiveProfileSection('my_works')"
       >
         Мои работы
       </p>
@@ -19,10 +19,10 @@
     <hr class="preson-data__hr">
     <hr class="preson-data__hr-blue">
     <AboutMe
-      v-if="activePage == 0"
+      v-if="this.$store.getters.activeProfileSection == 'about_me'"
     />
     <MyWorks
-      v-if="activePage == 1"
+      v-if="this.$store.getters.activeProfileSection == 'my_works'"
     />
   </section>
 </template>
@@ -40,13 +40,15 @@ export default {
   },
   data() {
     return {
-      activePage: 0,
     }
   },
+  mounted () {
+    this.$store.getters.activeProfileSection === 'about_me' ? document.querySelector(".preson-data__hr-blue").style.left = "0px" : document.querySelector(".preson-data__hr-blue").style.left = "200px"
+  },
   methods: {
-    swapActivePage (val) {
-      this.activePage = val
-      val === 0 ? document.querySelector(".preson-data__hr-blue").style.left = "0px" : document.querySelector(".preson-data__hr-blue").style.left = "200px"
+    swapActiveProfileSection (val) {
+      this.$store.commit('SET_activeProfileSection', val);
+      val === 'about_me' ? document.querySelector(".preson-data__hr-blue").style.left = "0px" : document.querySelector(".preson-data__hr-blue").style.left = "200px"
     }
   }
 };
