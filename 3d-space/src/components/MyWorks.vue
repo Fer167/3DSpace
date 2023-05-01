@@ -109,7 +109,7 @@ export default {
   width: 100vw;
   height: 100vh;
   background-color: rgb(0, 0, 0, 0.4);
-  z-index: 10;
+  z-index: 10000;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -51,11 +51,12 @@
           </p>
         </router-link>
         <hr class="header__hr">
-        <router-link class="header__menu-link" to="/3DModels">
-          <p class="header__menu-text">
-              Выйти
+          <p
+            class="header__menu-text"
+            @click="logout"
+          >
+            Выйти
           </p>
-        </router-link>
       </div>
 
       <router-link to="/">
@@ -72,13 +73,13 @@
           Поиск
         </p>
       </div>
-      <button v-if="!login"
+      <button v-if="!this.$store.getters.login"
         class="header__login"
         @click="openModal"
       >
         Войти
       </button>
-      <button v-if="login"
+      <button v-if="this.$store.getters.login"
         class="header__login"
         @click="openMenu"
       >
@@ -99,7 +100,6 @@ export default {
   data() {
     return {
       isMenuActive: false,
-      login: true,
       isModalActive: false,
     }
   },
@@ -111,6 +111,9 @@ export default {
     document.removeEventListener("click", this.closeManu);
   },
   methods: {
+    logout () {
+      this.$store.commit('SET_login', false);
+    },
     amimationFomOpacity () {
       window.pageYOffset > 100 ? document.querySelector(".header__wrap").style.backgroundColor = "#fff" : document.querySelector(".header__wrap").style.backgroundColor = "";
     },
@@ -161,7 +164,7 @@ export default {
   align-items: center;
   position: fixed;
   top: 0;
-  z-index: 10;
+  z-index: 10000;
   width: 100%;
   height: 100%;
   background-color: rgb(0, 0, 0, .5);

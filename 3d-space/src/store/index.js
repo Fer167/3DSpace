@@ -2,6 +2,7 @@ import { createStore } from "vuex";
 
 export default createStore({
   state: {
+    login: true,
     activeProfileSection: "about_me",
     personData: {
       name: "Максим",
@@ -25,6 +26,9 @@ export default createStore({
     ],
   },
   getters: {
+    login: state => {
+      return state.login;
+    },
     activeProfileSection: state => {
       return state.activeProfileSection;
     },
@@ -33,6 +37,9 @@ export default createStore({
     },
   },
   mutations: {
+    SET_login: (state, payload) => {
+      state.login = payload;
+    },
     SET_activeProfileSection: (state, payload) => {
       state.activeProfileSection = payload;
     },

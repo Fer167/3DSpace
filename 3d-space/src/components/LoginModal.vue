@@ -72,6 +72,7 @@
     <button
       v-if="typeForm !== 4"
       class="login-form__submit"
+      @click="goLogin"
     >
       {{ modalButtom }}
     </button>
@@ -105,6 +106,9 @@ export default {
     document.querySelector(".login-form__title").style.fontSize = "18px";
   },
   computed: {
+    goLogin () {
+      this.$store.commit('SET_login', true);
+    },
     modalTitle () {
       if (this.typeForm === 1) {
         return "Войти"
