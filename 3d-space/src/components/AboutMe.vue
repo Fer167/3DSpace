@@ -1,15 +1,67 @@
 <template>
   <section class="about-me">
-    <div
-      v-for="(item, name, index) of personData"
-      :key="index"
-      class="about-me__section"
-    >
+    <div class="about-me__section">
       <p class="about-me__title">
-        {{ dataField[index] }}
+        {{ dataField[0] }}
       </p>
       <p class="about-me__data">
-        {{ item }}
+        {{ this.$store.getters.personData.fullName }}
+      </p>
+    </div>
+    <div class="about-me__section">
+      <p class="about-me__title">
+        {{ dataField[1] }}
+      </p>
+      <p class="about-me__data">
+        {{ this.$store.getters.personData.address }}
+      </p>
+    </div>
+    <div class="about-me__section">
+      <p class="about-me__title">
+        {{ dataField[2] }}
+      </p>
+      <p class="about-me__data">
+        {{ this.$store.getters.personData.tel }}
+      </p>
+    </div>
+    <div class="about-me__section">
+      <p class="about-me__title">
+        {{ dataField[3] }}
+      </p>
+      <p class="about-me__data">
+        {{ this.$store.getters.personData.proposedPosition }}
+      </p>
+    </div>
+    <div class="about-me__section">
+      <p class="about-me__title">
+        {{ dataField[4] }}
+      </p>
+      <p class="about-me__data">
+        {{ this.$store.getters.personData.experience }}
+      </p>
+    </div>
+    <div class="about-me__section">
+      <p class="about-me__title">
+        {{ dataField[5] }}
+      </p>
+      <p class="about-me__data">
+        {{ this.$store.getters.personData.schooling }}
+      </p>
+    </div>
+    <div class="about-me__section">
+      <p class="about-me__title">
+        {{ dataField[6] }}
+      </p>
+      <p class="about-me__data">
+        {{ this.$store.getters.personData.skills }}
+      </p>
+    </div>
+    <div class="about-me__section">
+      <p class="about-me__title">
+        {{ dataField[7] }}
+      </p>
+      <p class="about-me__data">
+        {{ this.$store.getters.personData.additional }}
       </p>
     </div>
   </section>
@@ -23,7 +75,7 @@ export default {
     return {
       dataField: [
         "Полное имя",
-        "Место проживания",
+        "Адрес",
         "Телефон",
         "Предполагаемая должность",
         "Опыт работы",

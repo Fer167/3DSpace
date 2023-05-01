@@ -18,7 +18,7 @@
         class="header__menu"
       >
         <p class="header__menu-title">
-            Имя
+            {{ this.$store.getters.personData.name }}
         </p>
         <hr class="header__hr">
         <router-link
@@ -40,7 +40,7 @@
           </p>
         </router-link>
         <hr class="header__hr">
-        <router-link class="header__menu-link" to="/3DModels">
+        <router-link class="header__menu-link" to="/EditProfile">
           <p class="header__menu-text">
               Редактировать профиль
           </p>
@@ -101,7 +101,6 @@ export default {
       isMenuActive: false,
       login: true,
       isModalActive: false,
-      sdf: 6,
     }
   },
   mounted () {
@@ -266,8 +265,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-left: 20px;
-  padding-left: 20px;
+  margin-left: 40px;
   cursor: pointer;
 }
 .header__avatar {

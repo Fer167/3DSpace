@@ -20,6 +20,12 @@ const routes = [
     meta: { layout: "default" },
     component: () => import("../views/MyProfile.vue"),
   },
+  {
+    path: "/EditProfile",
+    name: "EditProfile",
+    meta: { layout: "default" },
+    component: () => import("../views/EditProfile.vue"),
+  },
 ];
 
 const router = createRouter({

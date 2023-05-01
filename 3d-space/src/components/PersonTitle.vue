@@ -5,10 +5,10 @@
     </div>
     <div>
       <p class="person__name">
-        Имя
+        {{ this.$store.getters.personData.name }}
       </p>
       <p>
-        3D-визуализатор, профессионально занимаюсь созданием помещений, загрузками готовых моделей, созданием реалистичных материалов, композиции кадра и освещением
+        {{ this.$store.getters.personData.short }}
       </p>
     </div>
   </section>
