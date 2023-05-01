@@ -22,10 +22,57 @@ export default createStore({
       additional: "Я ответственный, общительный, стрессоустойчивый, коммуникабельный, честный",
     },
     models: [
-
+      {
+        name: "Кастомная модель 1",
+        model: "",
+        user: "Максим",
+        avatarUser: "",
+        description: "Это описание данной модели",
+        date: "1.05.2023",
+        privacy: "public",
+      },
+      {
+        name: "Кастомная модель 2",
+        model: "",
+        user: "Максим",
+        avatarUser: "",
+        description: "Это описание данной модели",
+        date: "1.05.2023",
+        privacy: "public",
+      },
+      {
+        name: "Кастомная модель 3",
+        model: "",
+        user: "Максим",
+        avatarUser: "",
+        description: "Это описание данной модели",
+        date: "1.05.2023",
+        privacy: "public",
+      },
+      {
+        name: "Кастомная модель 4",
+        model: "",
+        user: "Максим",
+        avatarUser: "",
+        description: "Это описание данной модели",
+        date: "1.05.2023",
+        privacy: "public",
+      },
+      {
+        name: "Кастомная модель 5",
+        model: "",
+        user: "Максим",
+        avatarUser: "",
+        description: "Это описание данной модели",
+        date: "1.05.2023",
+        privacy: "public",
+      },
     ],
   },
   getters: {
+    models: state => {
+      return state.models;
+    },
     login: state => {
       return state.login;
     },
@@ -37,6 +84,9 @@ export default createStore({
     },
   },
   mutations: {
+    ADD_models: (state, payload) => {
+      state.models.push(payload);
+    },
     SET_login: (state, payload) => {
       state.login = payload;
     },

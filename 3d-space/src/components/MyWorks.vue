@@ -10,21 +10,21 @@
 
         </div>
         <p class="modal__model-name">
-          Название
+          {{ activModel.name }}
         </p>
         <div class="modal__user">
           <div class="modal__model-avatar">
             <img src="" alt="">
           </div>
           <p class="modal__model-user">
-            Пользователь
+          {{ activModel.user }}
           </p>
         </div>
         <p class="modal__model-description">
-          Описание
+          {{ activModel.description }}
         </p>
         <p class="modal__model-date">
-          Дата
+          {{ activModel.date }}
         </p>
       </div>
       <div class="modal__parameters">
@@ -37,10 +37,10 @@
 
   <section class="my-works">
     <button
-      v-for="(item, name, index) of models"
+      v-for="(item, name, index) of this.$store.getters.models"
       :key="index"
       class="my-works__models"
-      @click="openDetailsModel"
+      @click="openDetailsModel(item)"
     >
       <div class="my-works__canvas">
         
@@ -64,32 +64,12 @@ export default {
   data() {
     return {
       isActiovModalDetails: false,
-      models: [
-        {
-          name: "Название модели",
-          icon: "",
-        },
-        {
-          name: "Название модели",
-          icon: "",
-        },
-        {
-          name: "Название модели",
-          icon: "",
-        },
-        {
-          name: "Название модели",
-          icon: "",
-        },
-        {
-          name: "Название модели",
-          icon: "",
-        },
-      ],
+      activModel: {},
     }
   },
   methods: {
-    openDetailsModel () {
+    openDetailsModel (item) {
+      this.activModel  = JSON.parse(JSON.stringify(item));
       this.isActiovModalDetails = true
       document.body.style.overflow = "hidden";
     },
