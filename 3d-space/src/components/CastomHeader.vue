@@ -2,6 +2,45 @@
   <div class="header__wrap-height"></div>
 
   <div
+    class="header__search-wall"
+    v-if="searchModal"
+  >
+    <div class="header__search-container">
+      <div class="header__search-types">
+        <p
+          class="header__search-type"
+          :class="activeType === 'models' ? 'header__search-type_active' : ''"
+          @click="swapActiveType('models')"
+        >
+          Модели
+        </p>
+        <p
+          class="header__search-type"
+          :class="activeType === 'users' ? 'header__search-type_active' : ''"
+          @click="swapActiveType('users')"
+        >
+          Пользователи
+        </p>
+      </div>
+      <hr class="header__search-hr">
+      <hr class="header__search-blue">
+    </div>
+    <div
+      class="header__search-pictures"
+      v-if="!searchText"
+    >
+        <img
+          class="header__search-img"
+          src="../assets/image/search_fon.png"
+          alt=""
+        >
+        <p class="header__search-text">
+          Введите что-нибудь для поиска
+        </p>
+    </div>
+  </div>
+
+  <div
     class="login-modal"
     @click.self="closeModal"
     v-if="isModalActive"
@@ -64,26 +103,45 @@
         src="../assets/image/logo/second.png"
         alt="Logo">
       </router-link>
-      <router-link class="header__3d-models" to="/3DModels">
+      <router-link
+        v-if="!searchModal"
+        class="header__3d-models"
+        to="/3DModels"
+      >
         3D-модели
       </router-link>
-      <div class="header__search">
+      <div
+        class="header__search"
+        @click="searchModalActive"
+      >
         <img class="header__search-icon" src="../assets/image/search.png">
-        <p class="header__search-placeholder">
-          Поиск
-        </p>
+        <input
+          type="text"
+          class="header__search-placeholder"
+          placeholder="Поиск"
+          v-model="searchText"
+        >
       </div>
-      <button v-if="!this.$store.getters.login"
+      <button
         class="header__login"
+        v-if="!this.$store.getters.login && !searchModal"
         @click="openModal"
       >
         Войти
       </button>
-      <button v-if="this.$store.getters.login"
+      <button
         class="header__login"
+        v-if="this.$store.getters.login && !searchModal"
         @click="openMenu"
       >
         <img class="header__avatar" src="../assets/image/person/avatarDefault_example.jpg">
+      </button>
+      <button
+        class="header__close-search"
+        v-if="searchModal"
+        @click="searchModalRemove"
+      >
+        Отмена
       </button>
     </nav>
   </div>
@@ -101,6 +159,10 @@ export default {
     return {
       isMenuActive: false,
       isModalActive: false,
+      searchModal: false,
+      searchText: "",
+      activeType: "models",
+
     }
   },
   mounted () {
@@ -111,6 +173,15 @@ export default {
     document.removeEventListener("click", this.closeManu);
   },
   methods: {
+    swapActiveType (val) {
+      this.activeType = val
+      if (val === "models") {
+        document.querySelector(".header__search-blue").style.left = "0px"
+      }
+      if (val === "users") {
+        document.querySelector(".header__search-blue").style.left = "150px"
+      }
+    },
     logout () {
       this.$store.commit('SET_login', false);
     },
@@ -143,6 +214,20 @@ export default {
       if (document.querySelector(".preson-data__hr-blue")) {
         val === 'about_me' ? document.querySelector(".preson-data__hr-blue").style.left = "0px" : document.querySelector(".preson-data__hr-blue").style.left = "200px"
       }
+    },
+    searchModalActive () {
+      this.searchModal = true
+      document.body.style.overflow = "hidden";
+      document.querySelector(".header__search-placeholder").focus()
+      setTimeout(() => {
+        document.querySelector(".header__search-wall").style.top = "0vh"
+        document.querySelector(".header__search-pictures").style.top = "30vh"
+      }, 1);
+    },
+    searchModalRemove () {
+      this.searchModal = false
+      document.body.style.overflow = "";
+      this.searchText = ""
     }
   }
 };
@@ -225,11 +310,12 @@ export default {
 }
 
 .header__logo {
+  margin-right: 20px;
   height: 50px;
 }
 
 .header__3d-models {
-  margin: 0 20px;
+  /* margin: 0 20px; */
   /* padding: 0 20px; */
   display: flex;
   justify-content: center;
@@ -242,6 +328,7 @@ export default {
 
 .header__search {
   margin: 10px 0;
+  margin-left: 20px;
   display: flex;
   flex-direction: row;
   border: 2px solid #636363;
@@ -256,13 +343,21 @@ export default {
 }
 
 .header__search-placeholder {
+  font-size: 16px;
+  border: 0px;
+  background-color: rgb(0, 0, 0, .0);
   margin: 3px 8px;
   display: flex;
   justify-content: center;
   align-items: center;
   color: #838383;
+  margin: 0;
+  padding: 0;
+  width: 100%;
 }
-
+.header__search-placeholder:focus{
+    outline: none;
+}
 .header__login {
   background-color: rgb(0, 0, 0, .0);
   display: flex;
@@ -275,5 +370,89 @@ export default {
   width: 36px;
   border: 1px solid #000;
 
+}
+.header__close-search {
+  width: 150px;
+  height: 30px;
+  margin: 10px 0;
+  margin-left: 20px;
+  background-color: #fff;
+  border: 1px solid #1CAAD9;
+  border-radius: 6px;
+  color: #1CAAD9;
+}
+.header__close-search:hover {
+  background-color: #1CAAD9;
+  color: #fff;
+  transition: all 0.4s;
+}
+.header__search-wall {
+  width: 100vw;
+  height: 100vh;
+  background-color: #fff;
+  position: fixed;
+  top: -100vh;
+  z-index: 3;
+  transition: top 0.5s;
+}
+.header__search-img {
+  width: 600px;
+  margin: auto;
+  opacity: 0.6;
+}
+.header__search-text {
+  margin: auto;
+  font-size: 40px;
+  color: #A7A7A7;
+  opacity: 0.6;
+  cursor: auto;
+  -ms-user-select: none; 
+  -moz-user-select: none; 
+  -webkit-user-select: none; 
+  user-select: none;
+}
+.header__search-pictures {
+  position: fixed;
+  top: -70vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: top 0.5s;
+}
+.header__search-container {
+  width: 1280px;
+  margin: auto;
+}
+.header__search-types {
+  margin-top: 100px;
+  display: flex;
+  flex-direction: row;
+
+}
+.header__search-type {
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+  width: 150px;
+  cursor: pointer;
+}
+.header__search-type_active {
+  color: #1CAAD9;
+}
+.header__search-hr {
+  box-sizing: border-box;
+  margin: 0;
+  border: 0.5px solid #000;
+}
+.header__search-blue {
+  box-sizing: border-box;
+  margin: 0;
+  border: 2px solid #1CAAD9;
+  position: relative;
+  top: -3px;
+  left: 0px;
+  width: 150px;
+  transition: left 0.5s;
 }
 </style>
