@@ -33,7 +33,7 @@ export default {
     title: String,
     link: String,
     icon: Boolean,
-    fontSize: Number,
+    fontSize: String,
   },
   data() {
     return {

@@ -27,7 +27,7 @@ export default {
     text: String,
     title: String,
     link: String,
-    fontSize: Number,
+    fontSize: String,
   },
   data() {
     return {
