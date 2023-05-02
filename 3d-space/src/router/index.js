@@ -26,6 +26,12 @@ const routes = [
     meta: { layout: "default" },
     component: () => import("../views/EditProfile.vue"),
   },
+  {
+    path: "/AddModel",
+    name: "AddModel",
+    meta: { layout: "default" },
+    component: () => import("../views/AddModel.vue"),
+  },
 ];
 
 const router = createRouter({

@@ -45,7 +45,7 @@
               Редактировать профиль
           </p>
         </router-link>
-        <router-link class="header__menu-link" to="/3DModels">
+        <router-link class="header__menu-link" to="/AddModel">
           <p class="header__menu-text">
               Загрузить модель
           </p>

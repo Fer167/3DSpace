@@ -311,6 +311,7 @@ export default {
 }
 button {
   border: 1px solid #000;
+  border-radius: 10px;
   width: 260px;
   height: 40px;
   margin-top: 10px;
