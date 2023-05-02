@@ -33,6 +33,7 @@ export default {
     title: String,
     link: String,
     icon: Boolean,
+    fontSize: Number,
   },
   data() {
     return {
@@ -44,6 +45,7 @@ export default {
     setTimeout(() => {
       this.dataInput = this.text
     }, 1);
+    this.fontSize ? document.querySelector(".input__title").style.fontSize = this.fontSize + "px" : document.querySelector(".input__title").style.fontSize = "14px"
   },
   computed: {
     isLink () {
@@ -71,7 +73,6 @@ export default {
   justify-content: space-between;
 }
 .input__title {
-  font-size: 14px;
 }
 .input__link {
   font-size: 14px;

@@ -27,6 +27,7 @@ export default {
     text: String,
     title: String,
     link: String,
+    fontSize: Number,
   },
   data() {
     return {
@@ -37,6 +38,7 @@ export default {
     setTimeout(() => {
       this.dataInput = this.text
     }, 1);
+    this.fontSize ? document.querySelector(".textarea__title").style.fontSize = this.fontSize + "px" : document.querySelector(".textarea__title").style.fontSize = "14px"
   },
   computed: {
     isLink () {
@@ -64,7 +66,6 @@ export default {
   justify-content: space-between;
 }
 .textarea__title {
-  font-size: 14px;
 }
 .textarea__link {
   font-size: 14px;
