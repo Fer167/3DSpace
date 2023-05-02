@@ -1,7 +1,64 @@
 <template>
   <section class="add-model">
     <form class="add-model__form">
-
+      <AInput
+        @input-data="nameModel"
+        style="margin-top: 30px"
+        title="Название модели"
+        font-size="16"
+      />
+      <div class="add-model__section">
+        <p>
+          Загрузить модель
+        </p>
+        <form enctype="multipart/form-data" method="post">
+          <input
+            id="file"
+            type="file"
+            style="display: none;"
+          >
+          <label
+            class="add-model__btn"
+            for="file"
+          >
+            Загрузить
+          </label>
+        </form>
+      </div>
+      <ATextarea
+        @textarea-data="descriptionModel"
+        style="margin-top: 30px"
+        title="Описание модели"
+        font-size="16"
+      />
+      <div class="add-model__section">
+        <p class="add-model__section-name">
+          Приватность
+        </p>
+        <div class="add-model__section-privacy">
+          <button
+            :class="localModel.privacy == 'public' ? 'add-model__btn_active' : ''"
+            type="button"
+            @click="publicActive"
+          >
+            Общедоступная модель
+          </button>
+          <button
+            :class="localModel.privacy == 'privacy' ? 'add-model__btn_active' : ''"
+            type="button"
+            @click="privacyActive"
+          >
+            Приватная модель
+          </button>
+          <button
+            :class="localModel.privacy == 'link' ? 'add-model__btn_active' : ''"
+            type="button"
+            @click="linkActive"
+          >
+            Доступ по ссылке
+          </button>
+        </div>
+      </div>
     </form>
     <aside>
       <div class="add-model__prompt">
@@ -15,13 +72,15 @@
           Поддерживаемые расширения: .gltf
         </p>
         <div class="add-model__wrap-submit">
-          <button
-            :class="true ? 'add-model__btn-submit' : 'add-model__submit-disabled'"
-            type="button"
-            @click="submitPersonData"
-          >
-            Отправить на модерацию
-          </button>
+          <router-link to="/MyProfile">
+            <button
+              :class="true ? 'add-model__btn-submit' : 'add-model__submit-disabled'"
+              type="button"
+              @click="submitPersonData"
+            >
+              Загрузить модель
+            </button>
+          </router-link>
         </div>
       </div>
     </aside>
@@ -41,13 +100,37 @@ export default {
   },
   data() {
     return {
+      localModel: {
+        name: "",
+        model: "",
+        user: "",
+        avatarUser: "",
+        description: "",
+        date: "",
+        privacy: "public",
+      },
     }
   },
   mounted () {
   },
   methods: {
+    nameModel (el) {
+      this.localModel.name = el.dataEmit
+    },
+    descriptionModel (el) {
+      this.localModel.description = el.dataEmit
+    },
+    publicActive () {
+      this.localModel.privacy = "public"
+    },
+    privacyActive () {
+      this.localModel.privacy = "privacy"
+    },
+    linkActive () {
+      this.localModel.privacy = "link"
+    },
     submitPersonData () {
-      console.log(123)
+      this.$store.commit('ADD_models', this.localModel);
     }
   }
 };
@@ -104,5 +187,27 @@ p {
   cursor: auto;
   margin: auto;
   opacity: 0.3;
+}
+.add-model__section {
+  margin-top: 40px;
+}
+.add-model__btn {
+  border: 1px solid #000;
+  border-radius: 5px;
+  background-color: #8ACDF2;
+  width: 220px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center ;
+}
+.add-model__btn_active {
+  border: 3px solid #35B7FF;
+  color: #2b82b1;
+}
+.add-model__section-privacy {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 </style>
