@@ -2,6 +2,7 @@ import { createStore } from "vuex";
 
 export default createStore({
   state: {
+    rerenderHeaderStore: 0,
     login: true,
     activeProfileSection: "about_me",
     personData: {
@@ -10,7 +11,7 @@ export default createStore({
       link: "/maxim",
       login: "qwer",
       password: "qwer",
-      avatar: "../assets/image/person/avatarDefault_example.jpg",
+      avatar: "avatarDefault_example.jpg",
       privacy: "public",
       fullName: "Петров Максим Владиславович",
       address: "г. Москва",
@@ -70,6 +71,9 @@ export default createStore({
     ],
   },
   getters: {
+    rerenderHeaderStore: state => {
+      return state.rerenderHeaderStore;
+    },
     models: state => {
       return state.models;
     },
@@ -86,6 +90,9 @@ export default createStore({
   mutations: {
     ADD_models: (state, payload) => {
       state.models.push(payload);
+    },
+    rerenderHeaderStore: (state, payload) => {
+      state.rerenderHeaderStore++
     },
     SET_login: (state, payload) => {
       state.login = payload;

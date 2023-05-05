@@ -5,12 +5,13 @@
         <div class="edit-profile__section-data">
           <img
             class="edit-profile__avatar-img"
-            src="../assets/image/person/avatarDefault_example.jpg"
+            :src="avatarLink"
             alt=""
           >
           <div class="edit-profile__wrap-avatar">
             <form enctype="multipart/form-data" method="post">
               <input
+                @change="downloadAvatar"
                 id="file"
                 type="file"
                 accept="image/jpeg,image/png"
@@ -192,13 +193,15 @@ export default {
   },
   data() {
     return {
+      avatarLink: "",
       localPersonData: {},
     }
   },
   mounted () {
-    this.localPersonData  = JSON.parse(JSON.stringify(this.$store.getters.personData));
+    this.localPersonData = JSON.parse(JSON.stringify(this.$store.getters.personData));
     setTimeout(() => {
-      this.localPersonData  = JSON.parse(JSON.stringify(this.$store.getters.personData));
+      this.localPersonData = JSON.parse(JSON.stringify(this.$store.getters.personData));
+      this.avatarLink = require('../assets/image/person/' + this.localPersonData.avatar);
     }, 1);
   },
   methods: {
@@ -206,6 +209,15 @@ export default {
       if (JSON.stringify(this.localPersonData) !== JSON.stringify(this.$store.getters.personData)) {
         this.$store.commit('SET_personData', this.localPersonData);
       }
+      this.$store.commit('rerenderHeaderStore');
+    },
+    downloadAvatar (e) {
+      let file = e.target.files[0];
+      this.avatarLink = require('../assets/image/person/' + file.name);
+      this.localPersonData.avatar = file.name;
+      // let reader = new FileReader();
+      // reader.readAsDataURL(file);
+      // document.querySelector(".edit-profile__avatar-img").src = reader.result;
     },
     publicActive () {
       this.localPersonData.privacy = "public"

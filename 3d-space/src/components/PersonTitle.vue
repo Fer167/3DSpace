@@ -1,7 +1,7 @@
 <template>
   <section class="person">
     <div class="person__img-wrap">
-      <img class="person__img" src="../assets/image/person/avatarDefault_example.jpg">
+      <img class="person__img" :src="avatarLink">
     </div>
     <div>
       <p class="person__name">
@@ -20,8 +20,11 @@ export default {
   },
   data() {
     return {
-
+      avatarLink: "",
     }
+  },
+  mounted () {
+    this.avatarLink = require('../assets/image/person/' + JSON.parse(JSON.stringify(this.$store.getters.personData)).avatar);
   },
   methods: {
 

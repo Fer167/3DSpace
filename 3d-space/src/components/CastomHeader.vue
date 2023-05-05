@@ -134,7 +134,7 @@
         v-if="this.$store.getters.login && !searchModal"
         @click="openMenu"
       >
-        <img class="header__avatar" src="../assets/image/person/avatarDefault_example.jpg">
+        <img class="header__avatar" :src="avatarLink">
       </button>
       <button
         class="header__close-search"
@@ -162,11 +162,13 @@ export default {
       searchModal: false,
       searchText: "",
       activeType: "models",
+      avatarLink: "",
 
     }
   },
   mounted () {
     window.addEventListener('scroll', this.amimationFomOpacity);
+    this.avatarLink = require('../assets/image/person/' + JSON.parse(JSON.stringify(this.$store.getters.personData)).avatar);
   },
   beforeDestroy () {
     window.removeEventListener('scroll', this.amimationFomOpacity);

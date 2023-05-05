@@ -1,5 +1,5 @@
 <template>
-  <CastomHeader></CastomHeader>
+  <CastomHeader :key="this.$store.getters.rerenderHeaderStore"></CastomHeader>
   <div class="fon">
     <router-view />
   </div>
