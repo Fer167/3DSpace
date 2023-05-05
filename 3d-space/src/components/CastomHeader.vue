@@ -207,8 +207,8 @@ export default {
     closeManu (event) {
       // if (event.target.classList[0] !== "header__hr" || event.target.classList[0] != "header__menu" || event.target.classList[0] != "header__avatar") {
         // console.log(event.target.classList[0])
-        this.isMenuActive = false;
-        document.removeEventListener("click", this.closeManu);
+      this.isMenuActive = false;
+      document.removeEventListener("click", this.closeManu);
       // }
     },
     swapActiveProfileSection (val) {
