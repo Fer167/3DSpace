@@ -162,6 +162,7 @@ export default {
   height: 200px;
   width: 900px;
   position: absolute;
+  background-color: #fff;
 }
 .modal__model-wrap3 {
   position: relative;

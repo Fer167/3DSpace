@@ -16,6 +16,7 @@
             id="file"
             type="file"
             style="display: none;"
+            @change="downloadModel"
           >
           <label
             class="add-model__btn"
@@ -114,6 +115,12 @@ export default {
   mounted () {
   },
   methods: {
+    submitPersonData () {
+      this.localModel.scaleModel = 16;
+      let date = new Date();
+      this.localModel.date = date.getDate() + '.' + (+date.getMonth() + 1) + '.' + date.getFullYear()
+      this.$store.commit('ADD_models', this.localModel);
+    },
     nameModel (el) {
       this.localModel.name = el.dataEmit
     },
@@ -129,8 +136,10 @@ export default {
     linkActive () {
       this.localModel.privacy = "link"
     },
-    submitPersonData () {
-      this.$store.commit('ADD_models', this.localModel);
+    downloadModel (e) {
+      let file = e.target.files[0];
+      console.log(file.name.split('.')[0])
+      this.localModel.model = file.name.split('.')[0];
     }
   }
 };

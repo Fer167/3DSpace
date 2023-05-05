@@ -27,9 +27,9 @@
         @input-data="passwordData"
         style="margin-top: 30px"
         title="Введите пароль"
-        link="Забыли пароль?"
         icon
       />
+        <!-- link="Забыли пароль?" -->
     </div>
     <div
       v-if="typeForm === 2"
