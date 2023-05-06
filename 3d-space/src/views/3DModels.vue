@@ -3,18 +3,18 @@
     <div class="all-models__title">
       3D Модели всех пользователей
     </div>
-    <MyWorks></MyWorks> 
+    <AllWorks></AllWorks> 
   </div>
 </template>
 
 <script>
-import MyWorks from '@/components/MyWorks.vue';
+import AllWorks from '@/components/AllWorks.vue';
 
 export default {
   props: {
   },
   components: {
-    MyWorks,
+    AllWorks,
   },
   data() {
     return {
