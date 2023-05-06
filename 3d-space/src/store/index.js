@@ -2,6 +2,7 @@ import { createStore } from "vuex";
 
 export default createStore({
   state: {
+    activeEditModel: {},
     rerenderHeaderStore: 0,
     login: true,
     activeProfileSection: "about_me",
@@ -24,6 +25,7 @@ export default createStore({
     },
     models: [
       {
+        id: 1,
         name: "Ruby",
         model: "1",
         scaleModel: 12,
@@ -34,6 +36,7 @@ export default createStore({
         privacy: "public",
       },
       {
+        id: 2,
         name: "Wood Bucket",
         model: "2",
         scaleModel: 20,
@@ -46,6 +49,9 @@ export default createStore({
     ],
   },
   getters: {
+    activeEditModel: state => {
+      return state.activeEditModel;
+    },
     rerenderHeaderStore: state => {
       return state.rerenderHeaderStore;
     },
@@ -66,8 +72,23 @@ export default createStore({
     ADD_models: (state, payload) => {
       state.models.push(payload);
     },
+    DELETE_models: (state, payload) => {
+      state.models.forEach(function(el, i) {
+        if (el.id == payload) state.models.splice(i, 1)
+      })
+    },
+    EDIT_models: (state, payload) => {
+      state.models.forEach(function(el, i) {
+        if (el.id == payload.id) state.models.splice(i, 1)
+      })
+      state.models.push(payload);
+      state.models.sort((prev, next) => prev.id - next.id);
+    },
     rerenderHeaderStore: (state, payload) => {
       state.rerenderHeaderStore++
+    },
+    SET_activeEditModel: (state, payload) => {
+      state.activeEditModel = payload;
     },
     SET_login: (state, payload) => {
       state.login = payload;

@@ -68,6 +68,7 @@
         <A3DModelCover
           :name="item.model"
           :slice="item.scaleModel"
+          :key="rerender3DModelCover"
         />
       </div>
       <div class="my-works__desc">
@@ -78,9 +79,33 @@
             alt=""
           >
         </div>
-        <p>
+        <p class="my-works__name">
           {{ item.name }}
         </p>
+        <router-link
+          to="/EditModel"
+        >
+          <button
+            class="my-works__btn-edit"
+            @click="modelEdit(item)"
+          >
+            <img
+              class="my-works__btn-icon"
+              src="../assets/image/edit.png"
+              alt=""
+            >
+          </button>
+        </router-link>
+        <button
+          class="my-works__btn-delete"
+          @click="modelDelete(item.id)"
+        >
+          <img
+            class="my-works__btn-icon"
+            src="../assets/image/delete.png"
+            alt=""
+          >
+        </button>
       </div>
     </button>
   </section>
@@ -103,13 +128,27 @@ export default {
       isActiovModalDetails: false,
       activModel: {},
       hoverClass: "",
+      activeDelOrEdit: false,
+      rerender3DModelCover: 0,
     }
   },
   methods: {
+    modelEdit (model) {
+      this.activeDelOrEdit = true
+      this.$store.commit('SET_activeEditModel', model);
+    },
+    modelDelete (id) {
+      this.activeDelOrEdit = true
+      this.$store.commit('DELETE_models', id);
+      this.rerender3DModelCover += 1
+    },
     openDetailsModel (item) {
-      this.activModel  = JSON.parse(JSON.stringify(item));
-      this.isActiovModalDetails = true
-      document.body.style.overflow = "hidden";
+      if (!this.activeDelOrEdit) {
+        this.activModel  = JSON.parse(JSON.stringify(item));
+        this.isActiovModalDetails = true
+        document.body.style.overflow = "hidden";
+      }
+      this.activeDelOrEdit = false
     },
     closeDetailsModel () {
       this.isActiovModalDetails = false
@@ -228,5 +267,31 @@ export default {
 .modal__model-link_active {
   color: #1CAAD9;
 }
-
+.my-works__name {
+  width: 100%;
+  text-align: start;
+}
+.my-works__btn-delete {
+  width: 50px;
+  height: 50px;
+  transition: background 0.4s;
+  border-radius: 0px 0px 10px 0px;
+}
+.my-works__btn-delete:hover {
+  background-color: #ca7c7c;
+}
+.my-works__btn-edit {
+  width: 50px;
+  height: 50px;
+  transition: background 0.4s;
+}
+.my-works__btn-edit:hover {
+  background-color: #7d6fbb;
+}
+.my-works__btn-icon {
+  padding-right: 10px;
+  padding-left: 10px;
+  width: 30px;
+  height: 30px;
+}
 </style>

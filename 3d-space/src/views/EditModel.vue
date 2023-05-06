@@ -1,58 +1,41 @@
 <template>
-  <section class="add-model">
-    <form class="add-model__form">
+  <section class="edit-model">
+    <form class="edit-model__form">
       <AInput
         @input-data="nameModel"
         style="margin-top: 30px"
         title="Название модели"
+        :text="localModel.name"
         font-size="16"
       />
-      <div class="add-model__section">
-        <p>
-          Загрузить модель
-        </p>
-        <form enctype="multipart/form-data" method="post">
-          <input
-            id="file"
-            type="file"
-            style="display: none;"
-            @change="downloadModel"
-          >
-          <label
-            class="add-model__btn"
-            for="file"
-          >
-            Загрузить
-          </label>
-        </form>
-      </div>
       <ATextarea
         @textarea-data="descriptionModel"
         style="margin-top: 30px"
         title="Описание модели"
+        :text="localModel.description"
         font-size="16"
       />
-      <div class="add-model__section">
-        <p class="add-model__section-name">
+      <div class="edit-model__section">
+        <p class="edit-model__section-name">
           Приватность
         </p>
-        <div class="add-model__section-privacy">
+        <div class="edit-model__section-privacy">
           <button
-            :class="localModel.privacy == 'public' ? 'add-model__btn_active' : ''"
+            :class="localModel.privacy == 'public' ? 'edit-model__btn_active' : ''"
             type="button"
             @click="publicActive"
           >
             Общедоступная модель
           </button>
           <button
-            :class="localModel.privacy == 'privacy' ? 'add-model__btn_active' : ''"
+            :class="localModel.privacy == 'privacy' ? 'edit-model__btn_active' : ''"
             type="button"
             @click="privacyActive"
           >
             Приватная модель
           </button>
           <button
-            :class="localModel.privacy == 'link' ? 'add-model__btn_active' : ''"
+            :class="localModel.privacy == 'link' ? 'edit-model__btn_active' : ''"
             type="button"
             @click="linkActive"
           >
@@ -62,24 +45,21 @@
       </div>
     </form>
     <aside>
-      <div class="add-model__prompt">
-        <p class="add-model__prompt-title">
+      <div class="edit-model__prompt">
+        <p class="edit-model__prompt-title">
           Внимание!
         </p>
         <p>
-          Присылайте только ваши модели. Чужие и библиотечные модели будут удаляться, а вам закроют доступ на сайт
+          Описание модели (закончить текст) 
         </p>
-        <p>
-          Поддерживаемые расширения: .gltf
-        </p>
-        <div class="add-model__wrap-submit">
+        <div class="edit-model__wrap-submit">
           <router-link to="/MyProfile">
             <button
-              :class="true ? 'add-model__btn-submit' : 'add-model__submit-disabled'"
+              :class="true ? 'edit-model__btn-submit' : 'edit-model__submit-disabled'"
               type="button"
-              @click="submitPersonData"
+              @click="submitEditModel"
             >
-              Загрузить модель
+              Сохранить изменения
             </button>
           </router-link>
         </div>
@@ -101,27 +81,16 @@ export default {
   },
   data() {
     return {
-      localModel: {
-        name: "",
-        model: "",
-        user: "",
-        avatarUser: "",
-        description: "",
-        date: "",
-        privacy: "public",
-      },
+      localModel: {},
+      startLocalModel: {},
     }
   },
   mounted () {
+    this.localModel = JSON.parse(JSON.stringify(this.$store.getters.activeEditModel));
   },
   methods: {
-    submitPersonData () {
-      this.localModel.scaleModel = 16;
-      const maxId = this.$store.getters.models[this.$store.getters.models.length - 1];
-      this.localModel.id = maxId ? maxId.id + 1 : 1
-      let date = new Date();
-      this.localModel.date = date.getDate() + '.' + (+date.getMonth() + 1) + '.' + date.getFullYear()
-      this.$store.commit('ADD_models', this.localModel);
+    submitEditModel () {
+      this.$store.commit('EDIT_models', this.localModel);
     },
     nameModel (el) {
       this.localModel.name = el.dataEmit
@@ -148,14 +117,14 @@ export default {
 </script>
 
 <style scoped>
-.add-model {
+.edit-model {
   width: 1280px;
   margin: auto;
   display: flex;
   flex-direction: row;
   margin-top: 50px;
 }
-.add-model__form {
+.edit-model__form {
   margin-right: 10px;
   width: 800px;
 }
@@ -166,7 +135,7 @@ button {
   height: 40px;
   margin-top: 10px;
 }
-.add-model__prompt {
+.edit-model__prompt {
   position: fixed;
   height: 400px;
   width: 480px;
@@ -174,35 +143,35 @@ button {
   color: #868686;
   box-sizing: border-box;
 }
-.add-model__prompt-title{
+.edit-model__prompt-title{
   font-size: 18px;
 }
 p {
   margin: 10px 0;
 }
-.add-model__wrap-submit {
+.edit-model__wrap-submit {
   margin-top: 50px;
   width: 100%;
   display: flex;
   justify-content: center;
 }
-.add-model__btn-submit {
+.edit-model__btn-submit {
   border: 3px solid #000;
   margin: auto;
 }
-.add-model__btn-submit:hover {
+.edit-model__btn-submit:hover {
   border: 3px solid #35B7FF;
   color: #2b82b1;
 }
-.add-model__submit-disabled {
+.edit-model__submit-disabled {
   cursor: auto;
   margin: auto;
   opacity: 0.3;
 }
-.add-model__section {
+.edit-model__section {
   margin-top: 40px;
 }
-.add-model__btn {
+.edit-model__btn {
   border: 1px solid #000;
   border-radius: 5px;
   background-color: #8ACDF2;
@@ -212,11 +181,11 @@ p {
   justify-content: center;
   align-items: center ;
 }
-.add-model__btn_active {
+.edit-model__btn_active {
   border: 3px solid #35B7FF;
   color: #2b82b1;
 }
-.add-model__section-privacy {
+.edit-model__section-privacy {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
