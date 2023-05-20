@@ -15,9 +15,23 @@
         <div class="modal__model-wrap1"></div>
         <div class="modal__model-wrap2"></div>
         <div class="modal__model-wrap3">
-          <p class="modal__model-name">
-            {{ activModel.name }}
-          </p>
+          <div class="modal__model-name">
+            <p >
+              {{ activModel.name }}
+            </p>
+            <div>
+              <img
+                class="modal__model-stars"
+                v-for="(item, name, index) of starImage"
+                :key="index"
+                :src="item.path"
+                alt=""
+                @mouseover="mouseoverStars(item.id)"
+                @mouseout="starsRated(false)"
+                @click="starsRated(item.id)"
+              >
+            </div>
+          </div>
           <div class="modal__user">
             <div class="modal__model-avatar">
               <router-link to="/MyProfile">
@@ -130,7 +144,34 @@ export default {
       hoverClass: "",
       activeDelOrEdit: false,
       rerender3DModelCover: 0,
+      starImage: [
+        {
+          id: 1,
+          path: require('../assets/image/star.png'),
+        },
+        {
+          id: 2,
+          path: require('../assets/image/star.png'),
+        },
+        {
+          id: 3,
+          path: require('../assets/image/star.png'),
+        },
+        {
+          id: 4,
+          path: require('../assets/image/star.png'),
+        },
+        {
+          id: 5,
+          path: require('../assets/image/star.png'),
+        },
+      ],
+      starsRatedAmountLocal: 0,
+      localActiveModel: 0,
     }
+  },
+  mounted () {
+    this.mouseoverStars(this.starsRatedAmount)
   },
   methods: {
     modelEdit (model) {
@@ -143,7 +184,10 @@ export default {
       this.rerender3DModelCover += 1
     },
     openDetailsModel (item) {
+      this.starsRatedAmountLocal = item.starsRatedAmount;
+      this.localActiveModel = item.id;
       if (!this.activeDelOrEdit) {
+        this.mouseoverStars(item.starsRatedAmount)
         this.activModel  = JSON.parse(JSON.stringify(item));
         this.isActiovModalDetails = true
         document.body.style.overflow = "hidden";
@@ -151,10 +195,29 @@ export default {
       this.activeDelOrEdit = false
     },
     closeDetailsModel () {
+      this.localActiveModel = 0;
       this.isActiovModalDetails = false
       document.body.style.overflow = "";
     },
-  }
+    starsRated (amount) {
+      if (amount) {
+        let data = {
+          item: this.localActiveModel,
+          value: amount
+        }
+        this.$store.commit('SET_madelRated', data);
+        this.starsRatedAmountLocal = amount
+      }
+      this.mouseoverStars(this.starsRatedAmountLocal)
+    },
+    mouseoverStars (id) {
+      let i = 0;
+      this.starImage.forEach((el) => {
+        i += 1;
+        el.path = id < i ? require('../assets/image/star.png') : require('../assets/image/star_active.png')
+      })
+    }
+  },
 };
 </script>
 
@@ -189,6 +252,15 @@ export default {
 .modal__model-name {
   font-size: 20px;
   margin: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.modal__model-stars {
+  width: 40px;
+  padding: 5px;
+  cursor: pointer;
 }
 .modal__model-avatar {
   height: 40px;

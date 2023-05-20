@@ -118,7 +118,8 @@ export default {
     submitPersonData () {
       this.localModel.scaleModel = 16;
       const maxId = this.$store.getters.models[this.$store.getters.models.length - 1];
-      this.localModel.id = maxId ? maxId.id + 1 : 1
+      this.localModel.id = maxId ? maxId.id + 1 : 1;
+      this.localModel.starsRatedAmount = 0;
       let date = new Date();
       this.localModel.date = date.getDate() + '.' + (+date.getMonth() + 1) + '.' + date.getFullYear()
       this.$store.commit('ADD_models', this.localModel);

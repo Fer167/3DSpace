@@ -28,6 +28,7 @@ export default createStore({
         id: 1,
         name: "Ruby",
         model: "1",
+        starsRatedAmount: 0,
         scaleModel: 12,
         user: "",
         avatarUser: "",
@@ -39,6 +40,7 @@ export default createStore({
         id: 2,
         name: "Wood Bucket",
         model: "2",
+        starsRatedAmount: 0,
         scaleModel: 20,
         user: "",
         avatarUser: "",
@@ -98,6 +100,9 @@ export default createStore({
     },
     SET_personData: (state, payload) => {
       state.personData  = JSON.parse(JSON.stringify(payload));
+    },
+    SET_madelRated: (state, payload) => {
+      state.models[payload.item-1].starsRatedAmount = payload.value;
     },
   },
   actions: {},
