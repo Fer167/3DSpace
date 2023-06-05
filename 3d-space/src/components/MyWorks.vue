@@ -85,6 +85,9 @@
         <p class="model__parameters-item">
           Права: {{ activModel.rights }}
         </p>
+        <p class="model__parameters-item">
+          Скачать: <a class="model__download" :href="`/models/${activModel.model}.gltf`" download="">в формате .gltf</a>
+        </p>
         <div class="model__tegs-wrap">
           <p
             class="model__parameters-tegs"
@@ -339,6 +342,12 @@ export default {
 .model__parameters-item {
   color: #747474;
   margin-bottom: 10px;
+}
+.model__download {
+  color: #0682a1
+}
+.model__download:hover {
+  text-decoration: underline;
 }
 .model__tegs-wrap {
   display: flex;
