@@ -285,6 +285,7 @@ p {
 }
 .add-model__section {
   margin-top: 40px;
+  margin-bottom: 40px;
 }
 .add-model__section-tegs {
   display: flex;
