@@ -64,9 +64,36 @@
         </div>
       </div>
       <div class="modal__parameters">
-        <p>
+        <p class="model__parameters-title">
           Параметры
         </p>
+        <p class="model__parameters-item">
+          Программа: {{ activModel.programs }}
+        </p>
+        <p class="model__parameters-item">
+          Render: {{ activModel.render }}
+        </p>
+        <p class="model__parameters-item">
+          Полигоны: {{ activModel.poliigons }}
+        </p>
+        <p class="model__parameters-item">
+          Вершины: {{ activModel.vertices }}
+        </p>
+        <p class="model__parameters-item">
+          Вес файла: {{ activModel.fileWeight }}
+        </p>
+        <p class="model__parameters-item">
+          Права: {{ activModel.rights }}
+        </p>
+        <div class="model__tegs-wrap">
+          <p
+            class="model__parameters-tegs"
+            v-for="(itemTegs, name, index) of activModel.tegs"
+            :key="index"
+          >
+            {{ itemTegs }}
+          </p>
+        </div>
       </div>
     </div>
   </div>
@@ -303,6 +330,27 @@ export default {
   width: 300px;
   background-color: #f3f3f3;
   padding: 20px;
+}
+.model__parameters-title {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.model__parameters-item {
+  color: #747474;
+  margin-bottom: 10px;
+}
+.model__tegs-wrap {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.model__parameters-tegs {
+  margin: 5px;
+  padding: 5px 10px;
+  border-radius: 50px;
+  background-color: #b8b8b8;
+  cursor: pointer;
 }
 .my-works {
   width: 1320px;

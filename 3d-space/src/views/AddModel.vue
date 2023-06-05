@@ -32,6 +32,60 @@
         title="Описание модели"
         font-size="16"
       />
+      <AInput
+        @input-data="programModel"
+        style="margin-top: 30px"
+        title="Программа разработки"
+        font-size="16"
+      />
+      <AInput
+        @input-data="renderModel"
+        style="margin-top: 30px"
+        title="Render"
+        font-size="16"
+      />
+      <AInput
+        @input-data="poliigonsModel"
+        style="margin-top: 30px"
+        title="Количество полигонов"
+        font-size="16"
+      />
+      <AInput
+        @input-data="verticesModel"
+        style="margin-top: 30px"
+        title="Количество вершин"
+        font-size="16"
+      />
+      <AInput
+        @input-data="fileWeightModel"
+        style="margin-top: 30px"
+        title="Размер файла"
+        font-size="16"
+      />
+      <AInput
+        @input-data="rightsModel"
+        style="margin-top: 30px"
+        title="Права"
+        font-size="16"
+      />
+      <AInput
+        @input-data="tegsModel"
+        style="margin-top: 30px"
+        title="Теги (разделяйте теги пробелом)"
+        font-size="16"
+      />
+      <div
+        class="add-model__section-tegs"
+        v-if="localModel.tegs[0] !== ''"
+      >
+        <p
+          class="add-model__tegs"
+          v-for="(item, name, index) of itemFilter"
+          :key="index"
+        >
+          {{ item }}
+        </p>
+      </div>
       <div class="add-model__section">
         <p class="add-model__section-name">
           Приватность
@@ -109,6 +163,7 @@ export default {
         description: "",
         date: "",
         privacy: "public",
+        tegs: [""],
       },
     }
   },
@@ -130,6 +185,29 @@ export default {
     descriptionModel (el) {
       this.localModel.description = el.dataEmit
     },
+    programModel (el) {
+      this.localModel.programs = el.dataEmit
+    },
+    renderModel (el) {
+      this.localModel.render = el.dataEmit
+    },
+    poliigonsModel (el) {
+      this.localModel.poliigons = el.dataEmit
+    },
+    verticesModel (el) {
+      this.localModel.vertices = el.dataEmit
+    },
+    fileWeightModel (el) {
+      this.localModel.fileWeight = el.dataEmit
+    },
+    rightsModel (el) {
+      this.localModel.rights = el.dataEmit
+    },
+    tegsModel (el) {
+      this.localModel.tegs = el.dataEmit.split(' ').filter(el => {
+          return (el != "");
+      })
+    },
     publicActive () {
       this.localModel.privacy = "public"
     },
@@ -144,7 +222,12 @@ export default {
       console.log(file.name.split('.')[0])
       this.localModel.model = file.name.split('.')[0];
     }
-  }
+  },
+  computed: {
+    itemFilter () {
+      return this.localModel.tegs.filter(el => el != "")
+    }
+  },
 };
 </script>
 
@@ -202,6 +285,16 @@ p {
 }
 .add-model__section {
   margin-top: 40px;
+}
+.add-model__section-tegs {
+  display: flex;
+  flex-direction: row;
+}
+.add-model__tegs {
+  padding: 5px 10px;
+  margin: 5px;
+  background-color: #b9b9b9;
+  border-radius: 50px;
 }
 .add-model__btn {
   border: 1px solid #000;

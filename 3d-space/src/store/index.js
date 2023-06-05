@@ -26,27 +26,41 @@ export default createStore({
     models: [
       {
         id: 1,
-        name: "Ruby",
+        name: "Рубин",
         model: "1",
         starsRatedAmount: 0,
         scaleModel: 12,
         user: "",
         avatarUser: "",
-        description: "Модель взята отсюда: https://market.pmnd.rs/model/ruby",
+        description: "Красный рубин",
         date: "1.05.2023",
         privacy: "public",
+        programs: "3D Max",
+        render: "Arnold",
+        poliigons: "160",
+        vertices: "80",
+        fileWeight: "15Mb",
+        rights: "https://market.pmnd.rs/model/ruby",
+        tegs: ["3DModel", "3DMax", "Ruby"]
       },
       {
         id: 2,
-        name: "Wood Bucket",
+        name: "Деревянное ведро",
         model: "2",
         starsRatedAmount: 0,
         scaleModel: 20,
         user: "",
         avatarUser: "",
-        description: "Модель взята отсюда: https://market.pmnd.rs/model/wood-bucket",
+        description: "Деревянное ведро",
         date: "1.05.2023",
         privacy: "public",
+        programs: "3D Max",
+        render: "Arnold",
+        poliigons: "128",
+        vertices: "36",
+        fileWeight: "15Mb",
+        rights: "https://market.pmnd.rs/model/wood-bucket",
+        tegs: ["3DModel", "3DMax", "Bucket", "model"]
       },
     ],
   },
@@ -72,6 +86,27 @@ export default createStore({
   },
   mutations: {
     ADD_models: (state, payload) => {
+      if (!payload.programs) {
+        payload.programs = ""
+      }
+      if (!payload.render) {
+        payload.render = ""
+      }
+      if (!payload.poliigons) {
+        payload.poliigons = ""
+      }
+      if (!payload.vertices) {
+        payload.vertices = ""
+      }
+      if (!payload.fileWeight) {
+        payload.fileWeight = ""
+      }
+      if (!payload.rights) {
+        payload.rights = ""
+      }
+      if (!payload.tegs) {
+        payload.tegs = []
+      }
       state.models.push(payload);
     },
     DELETE_models: (state, payload) => {
