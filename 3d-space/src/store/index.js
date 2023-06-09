@@ -7,12 +7,13 @@ export default createStore({
     login: true,
     activeProfileSection: "about_me",
     personData: {
+      id: 1,
       name: "Максим",
-      short: "3D-визуализатор, профессионально занимаюсь созданием помещений, созданием реалистичных материалов, композиции кадра и освещением",
-      link: "/maxim",
       login: "qwer",
       password: "qwer",
+      link: "/maxim",
       avatar: "avatarDefault_example.jpg",
+      short: "3D-визуализатор, профессионально занимаюсь созданием помещений, созданием реалистичных материалов, композиции кадра и освещением",
       privacy: "public",
       fullName: "Петров Максим Владиславович",
       address: "г. Москва",
@@ -26,12 +27,13 @@ export default createStore({
     models: [
       {
         id: 1,
+        userId: 1,
         name: "Рубин",
         model: "1",
         starsRatedAmount: 0,
-        scaleModel: 12,
-        user: "",
-        avatarUser: "",
+        scaleModel: 12,//лишнее
+        user: "",//лишнее
+        avatarUser: "",//лишнее
         description: "Красный рубин",
         date: "1.05.2023",
         privacy: "public",
@@ -45,12 +47,13 @@ export default createStore({
       },
       {
         id: 2,
+        userId: 1,
         name: "Деревянное ведро",
         model: "2",
         starsRatedAmount: 0,
-        scaleModel: 20,
-        user: "",
-        avatarUser: "",
+        scaleModel: 20,//лишнее
+        user: "",//лишнее
+        avatarUser: "",//лишнее
         description: "Деревянное ведро",
         date: "1.05.2023",
         privacy: "public",
