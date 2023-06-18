@@ -110,6 +110,13 @@
       >
         3D-модели
       </router-link>
+      <router-link
+        v-if="!searchModal"
+        class="header__3d-models"
+        to="/Vacancies"
+      >
+        Вакансии
+      </router-link>
       <div
         class="header__search"
         @click="searchModalActive"

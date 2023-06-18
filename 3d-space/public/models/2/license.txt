@@ -1,0 +1,11 @@
+Model Information:
+* title:	Multi_ Oreo_ Pack
+* source:	https://sketchfab.com/3d-models/multi--oreo--pack-22b2430c2ec1413c84c44c1c051be066
+* author:	multikunst (https://sketchfab.com/multikunst)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Multi_ Oreo_ Pack" (https://sketchfab.com/3d-models/multi--oreo--pack-22b2430c2ec1413c84c44c1c051be066) by multikunst (https://sketchfab.com/multikunst) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

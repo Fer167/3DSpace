@@ -82,9 +82,9 @@
         <p class="model__parameters-item">
           Вес файла: {{ activModel.fileWeight }}
         </p>
-        <p class="model__parameters-item">
+        <!-- <p class="model__parameters-item">
           Права: {{ activModel.rights }}
-        </p>
+        </p> -->
         <p class="model__parameters-item">
           Скачать: <a class="model__download" :href="`/models/${activModel.model}.gltf`" download="">в формате .gltf</a>
         </p>

@@ -82,9 +82,9 @@
         <p class="model__parameters-item">
           Вес файла: {{ activModel.fileWeight }}
         </p>
-        <p class="model__parameters-item">
+        <!-- <p class="model__parameters-item">
           Права: {{ activModel.rights }}
-        </p>
+        </p> -->
         <p class="model__parameters-item">
           Скачать: <a class="model__download" :href="`/models/${activModel.model}.gltf`" download="">в формате .gltf</a>
         </p>
@@ -102,32 +102,38 @@
   </div>
 
   <section class="all-works">
-    <button
+    <div
       v-for="(item, name, index) of this.$store.getters.models"
       :key="index"
-      class="all-works__models"
-      @click="openDetailsModel(item)"
     >
-      <div class="all-works__canvas">
-        <A3DModelCover
-          :name="item.model"
-          :slice="item.scaleModel"
-          :key="rerender3DModelCover"
-        />
-      </div>
-      <div class="all-works__desc">
-        <div>
-          <img
-            class="all-works__avatar"
-            :src="avatarModelLink"
-            alt=""
-          >
+      <button
+        class="all-works__models"
+        @click="openDetailsModel(item)"
+        v-if="item.privacy == 'public'"
+      >
+        <div 
+          class="all-works__canvas"
+        >
+          <A3DModelCover
+            :name="item.model"
+            :slice="item.scaleModel"
+          />
+            <!-- :key="rerender3DModelCover" -->
         </div>
-        <p class="all-works__name">
-          {{ item.name }}
-        </p>
-      </div>
-    </button>
+        <div class="all-works__desc">
+          <div>
+            <img
+              class="all-works__avatar"
+              :src="avatarModelLink"
+              alt=""
+            >
+          </div>
+          <p class="all-works__name">
+            {{ item.name }}
+          </p>
+        </div>
+      </button>
+    </div>
   </section>
 </template>
 
@@ -334,8 +340,11 @@ export default {
   min-width: 400px;
   /* height: 250px; */
   border: 1px solid #000;
-  box-shadow: 0px 0px 10px rgb(105, 105, 105);
   border-radius: 10px;
+  box-shadow: 0px 0px 10px rgb(105, 105, 105);
+}
+.all-works__models:hover {
+  box-shadow: 0px 0px 20px rgb(105, 105, 105);
 }
 .all-works__canvas {
   height: 298px;

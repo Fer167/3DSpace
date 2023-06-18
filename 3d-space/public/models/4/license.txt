@@ -1,0 +1,11 @@
+Model Information:
+* title:	Futuristic Box
+* source:	https://sketchfab.com/3d-models/futuristic-box-93723b8fec6a47259683944ac6fb5378
+* author:	kraffing Studio (https://sketchfab.com/kraffing)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Futuristic Box" (https://sketchfab.com/3d-models/futuristic-box-93723b8fec6a47259683944ac6fb5378) by kraffing Studio (https://sketchfab.com/kraffing) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

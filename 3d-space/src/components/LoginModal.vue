@@ -72,7 +72,7 @@
     <button
       v-if="typeForm !== 4"
       class="login-form__submit"
-      @click="goLogin"
+      @click.prevent="goLogin"
     >
       {{ modalButtom }}
     </button>
@@ -107,7 +107,10 @@ export default {
   },
   computed: {
     goLogin () {
-      this.$store.commit('SET_login', true);
+      if (this.login.email == "zxcv@gmail.com") {
+        this.$store.commit('SET_login', true);
+        this.closeModal()
+      }
     },
     modalTitle () {
       if (this.typeForm === 1) {

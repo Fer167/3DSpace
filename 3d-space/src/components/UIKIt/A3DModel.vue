@@ -1,6 +1,6 @@
 <template>
   <canvas class="model" ref="canvasRef"></canvas>
-  <p class="link-model">Ссылка на модель: https://market.pmnd.rs/model/zombie-car</p>
+  <!-- <p class="link-model">Ссылка на модель: https://market.pmnd.rs/model/zombie-car</p> -->
 </template>
 
 <script setup>
@@ -170,7 +170,7 @@
     75,
     600 / 600,
     0.1,
-    100
+    10000
   );
   camera.position.y=10;
   camera.position.z=20;

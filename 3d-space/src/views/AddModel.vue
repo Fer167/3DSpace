@@ -11,20 +11,28 @@
         <p>
           Загрузить модель
         </p>
-        <form enctype="multipart/form-data" method="post">
-          <input
-            id="file"
-            type="file"
-            style="display: none;"
-            @change="downloadModel"
+        <div class="add-model__wrap-download">
+          <form enctype="multipart/form-data" method="post">
+            <input
+              id="file"
+              type="file"
+              style="display: none;"
+              @change="downloadModel"
+            >
+            <label
+              class="add-model__btn"
+              for="file"
+            >
+              Загрузить
+            </label>
+          </form>
+          <p
+            class="add-model__path-model"
+            v-if="pathModel != ''"
           >
-          <label
-            class="add-model__btn"
-            for="file"
-          >
-            Загрузить
-          </label>
-        </form>
+            Нзвание загружаемой модели: {{ pathModel }}
+          </p>
+        </div>
       </div>
       <ATextarea
         @textarea-data="descriptionModel"
@@ -155,6 +163,7 @@ export default {
   },
   data() {
     return {
+      pathModel: "",
       localModel: {
         name: "",
         model: "",
@@ -171,7 +180,7 @@ export default {
   },
   methods: {
     submitPersonData () {
-      this.localModel.scaleModel = 16;
+      this.localModel.scaleModel = 1;
       const maxId = this.$store.getters.models[this.$store.getters.models.length - 1];
       this.localModel.id = maxId ? maxId.id + 1 : 1;
       this.localModel.starsRatedAmount = 0;
@@ -219,7 +228,7 @@ export default {
     },
     downloadModel (e) {
       let file = e.target.files[0];
-      console.log(file.name.split('.')[0])
+      this.pathModel = file.name
       this.localModel.model = file.name.split('.')[0];
     }
   },
@@ -270,6 +279,10 @@ p {
   display: flex;
   justify-content: center;
 }
+.add-model__wrap-download {
+  display: flex;
+  flex-direction: row;
+}
 .add-model__btn-submit {
   border: 3px solid #000;
   margin: auto;
@@ -277,6 +290,13 @@ p {
 .add-model__btn-submit:hover {
   border: 3px solid #35B7FF;
   color: #2b82b1;
+}
+.add-model__path-model {
+  display: flex;
+  align-items: center;
+  color: #919191;
+  margin: 0;
+  margin-left: 20px;
 }
 .add-model__submit-disabled {
   cursor: auto;

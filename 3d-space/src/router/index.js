@@ -38,6 +38,18 @@ const routes = [
     meta: { layout: "default" },
     component: () => import("../views/EditModel.vue"),
   },
+  {
+    path: "/Vacancies",
+    name: "Vacancies",
+    meta: { layout: "default" },
+    component: () => import("../views/Vacancies.vue"),
+  },
+  {
+    path: "/VacanciesDetail",
+    name: "VacanciesDetail",
+    meta: { layout: "default" },
+    component: () => import("../views/VacanciesDetail.vue"),
+  },
 ];
 
 const router = createRouter({

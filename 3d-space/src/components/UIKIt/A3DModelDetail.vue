@@ -173,7 +173,7 @@
     75,
     600 / 600,
     0.1,
-    100
+    10000
   );
   camera.position.y=10;
   camera.position.z=20;
